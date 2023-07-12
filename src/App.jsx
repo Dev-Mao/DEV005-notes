@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import Login from './pages/Login';
+import Wall from './pages/Wall';
+import SignUp from './pages/SignUp';
+import { app } from './lib/firebase';
+import { onAuthStateChanged, getAuth } from 'firebase/auth';
+import { useEffect } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate();
+
+  const auth = getAuth(app);  
+
+  useEffect(() => {
+    const currentPath = window.location.pathname;
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate('/wall');
+      } else if (currentPath === '/' || currentPath === '/signup') {
+          navigate(currentPath);
+      }else{
+        navigate('/')
+      }
+    });
+  }, [navigate, auth]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/wall" element={<Wall />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App

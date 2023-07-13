@@ -8,14 +8,17 @@ const Wall = () => {
     const [success, setSuccess] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+
     const openModal = () => {
       setIsModalOpen(true);
-      setSuccess(false)
+      setSuccess(false);
     };
   
     const closeModal = () => {
       setIsModalOpen(false);
     };
+
+ 
 
     return (
         <>

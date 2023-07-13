@@ -9,18 +9,20 @@ const NotesContainer = () => {
   const currentUser = auth.currentUser;
 
   useEffect(() => {
-    const db = getFirestore(app);
-    const notesRef = collection(db, 'notes');
-    const q = query(notesRef, where('author', '==', currentUser.email));
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      const notesData = [];
-      snapshot.forEach((doc) => {
-        notesData.push({ id: doc.id, ...doc.data() });
+    if (currentUser) {
+      const db = getFirestore(app);
+      const notesRef = collection(db, 'notes');
+      const q = query(notesRef, where('author', '==', currentUser.email));
+      const unsubscribe = onSnapshot(q, (snapshot) => {
+        const notesData = [];
+        snapshot.forEach((doc) => {
+          notesData.push({ id: doc.id, ...doc.data() });
+        });
+        setNotes(notesData);
       });
-      setNotes(notesData);
-    });
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    }
   }, [currentUser]);
 
   return (

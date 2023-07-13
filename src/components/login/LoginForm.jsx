@@ -12,8 +12,10 @@ const LoginForm = () => {
 
     // Manejar el envío del formulario y hacer la solicitud de la api para crear usuario
     const onSubmit = (data) => {
+       
         signInWithEmailAndPassword(auth, data.email, data.password)
         .then(() => {
+            localStorage.setItem('currentUser', auth.currentUser.email)
         })
         .catch((err) => {
             console.log(err)

@@ -1,18 +1,16 @@
 import { getFirestore, collection, onSnapshot, query, where } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import { app } from '../../lib/firebase';
 
 const NotesContainer = () => {
   const [notes, setNotes] = useState([]);
-  const auth = getAuth(app);
-  const currentUser = auth.currentUser;
+  const currentUser = localStorage.getItem('currentUser');
 
   useEffect(() => {
-    if (currentUser) {
+  
       const db = getFirestore(app);
       const notesRef = collection(db, 'notes');
-      const q = query(notesRef, where('author', '==', currentUser.email));
+      const q = query(notesRef, where('author', '==', currentUser));
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const notesData = [];
         snapshot.forEach((doc) => {
@@ -22,7 +20,7 @@ const NotesContainer = () => {
       });
 
       return () => unsubscribe();
-    }
+    
   }, [currentUser]);
 
   return (

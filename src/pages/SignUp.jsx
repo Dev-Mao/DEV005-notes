@@ -7,8 +7,7 @@ const SignUp= () => {
         <>
             <SignUpForm/>
             <BtnLoginGoogle/>
-        </>
-        
+        </>   
     );
 };
 

@@ -89,7 +89,7 @@ export default NewNote;
   
 NewNote.propTypes = {
   success: PropTypes.bool,
-  onRequestClose: PropTypes.bool,
+  onRequestClose: PropTypes.func,
   isOpen: PropTypes.bool,
   setSuccess: PropTypes.func,
 };

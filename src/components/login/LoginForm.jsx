@@ -28,7 +28,7 @@ const LoginForm = () => {
         <>
             <section className="section-login">
                 <form className="form-login" onSubmit={handleSubmit(onSubmit)}> 
-                    <div className="container-input-new-employee">           
+                    <div className="container-form">           
                         <AiOutlineMail className="icon-form" />
                         <label htmlFor="email">Email:</label>   
                         <input

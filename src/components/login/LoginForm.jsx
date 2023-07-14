@@ -1,4 +1,3 @@
-import { AiOutlineLock, AiOutlineMail } from "react-icons/ai";
 import { useForm } from 'react-hook-form';
 import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { app } from "../../lib/firebase.js";
@@ -30,9 +29,8 @@ const LoginForm = () => {
         <>
         
                 <form className="form-login" onSubmit={handleSubmit(onSubmit)}> 
-                    <div className="container-form">           
-                        <AiOutlineMail className="icon-form" />
-                        <label htmlFor="email">Email:</label>   
+                    <div className="container-input-login">           
+                        <label htmlFor="email">Your email</label>   
                         <input
                             {...register('email', {
                                 required: 'Email required',
@@ -44,14 +42,13 @@ const LoginForm = () => {
                             type="text"
                             className="input-login"
                             id="email"
-                            placeholder="Email"
+                            placeholder="you@email.com"
                             />     
                         {errors.email && <p className="error-message">{errors.email.message}</p>}                  
                     </div>  
             
                     <div className="container-input-login">  
-                        <AiOutlineLock className="icon-form" />
-                        <label htmlFor="password">Password:</label>
+                        <label htmlFor="password">Password</label>
                         <input
                             {...register('password', { 
                                 required: 'Password required',
@@ -63,14 +60,14 @@ const LoginForm = () => {
                             type="password"
                             className="input-login"
                             id="password"
-                            placeholder="Password"
+                            placeholder="•••••••"
                         />
                         {errors.password && <p className="error-message">{errors.password.message}</p>}                        
                     </div>     
 
                     <button type="submit" className="submit-btn">Login</button>
                 </form> 
-                <span>You do not have an account yet? <a href="" onClick={handleClickSignup}>Sign Up</a></span>           
+                <span className='span-login'>You do not have an account yet? <a href="" className="link" onClick={handleClickSignup}>Sign up for free</a></span>           
 
         </>
     );

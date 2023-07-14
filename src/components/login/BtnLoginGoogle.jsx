@@ -1,6 +1,7 @@
 // Importa las dependencias necesarias
 import { signInWithRedirect, GoogleAuthProvider, getAuth } from 'firebase/auth';
 import { app } from '../../lib/firebase';
+import {FcGoogle} from 'react-icons/fc'
 const BtnLoginGoogle = () => {
 
     const auth = getAuth(app);
@@ -20,6 +21,7 @@ const BtnLoginGoogle = () => {
     return (
         <div className="container-btn-login-google">
             <button className="btn-login-google" onClick = {handleClick}>
+                <FcGoogle className='icon-google'/>
                 Login with Google                     
             </button>
         </div>

@@ -27,13 +27,13 @@ function App() {
   }, [navigate, auth]);
 
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/wall" element={<Wall />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

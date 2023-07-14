@@ -28,7 +28,7 @@ const LoginForm = () => {
     
     return (
         <>
-            <section className="section-login">
+        
                 <form className="form-login" onSubmit={handleSubmit(onSubmit)}> 
                     <div className="container-form">           
                         <AiOutlineMail className="icon-form" />
@@ -71,7 +71,7 @@ const LoginForm = () => {
                     <button type="submit" className="submit-btn">Login</button>
                 </form> 
                 <span>You do not have an account yet? <a href="" onClick={handleClickSignup}>Sign Up</a></span>           
-            </section>
+
         </>
     );
   };

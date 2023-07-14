@@ -22,6 +22,7 @@ const NotesContainer = () => {
   const handleIconEdit = (noteId) =>{
     setIsModalEditOpen(true)
     setSelectedNote(noteId)
+    setEditSuccess(false)
    
   }
 

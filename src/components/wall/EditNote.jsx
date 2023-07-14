@@ -1,8 +1,6 @@
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
-import { app } from '../../lib/firebase';
-import { getAuth } from 'firebase/auth';
-import { getFirestore, addDoc, collection } from 'firebase/firestore';
+import { getFirestore, updateDoc, doc } from 'firebase/firestore';
 
 
 const EditNote = (props) => {
@@ -10,16 +8,9 @@ const EditNote = (props) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
 
     const onSubmit = (data) =>{
-            const auth = getAuth(app);
-            const title = data.title;
-            const content = data.content;
-            addDoc(collection(getFirestore(), 'notes'), {
-              title,
-              content,
-              author: auth.currentUser.email,
-            })
+            updateDoc(doc(getFirestore(), 'notes', props.selectedNote.id), data)
             .then(() =>{
-              props.setEditSuccess(true);
+                props.setEditSuccess(true)
               reset()
             });          
     }
@@ -79,7 +70,7 @@ const EditNote = (props) => {
           {errors.content && <p className="error-message">{errors.content.message}</p>}                        
       </div>     
 
-      <button type="submit" className="submit-btn">Create</button>
+      <button type="submit" className="submit-btn">Edit</button>
     </form> 
   )}       
       </Modal>

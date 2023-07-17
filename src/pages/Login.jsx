@@ -25,7 +25,7 @@ const Login = () => {
                     <h1 className="title-login">Welcome back!</h1>  
                     <span className="span-login">Continue with Google or enter your details.</span>
                     <BtnLoginGoogle/>
-                    <span className="span-login">or</span>
+                    <span className="span-login-lines">or</span>
                     <LoginForm/>
                     
                 </div>                         

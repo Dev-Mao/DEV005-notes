@@ -2,7 +2,6 @@ import BtnLogout from "../components/BtnLogout";
 import NewNote from "../components/wall/NewNote";
 import NotesContainer from "../components/wall/NotesContainer";
 import { useState } from 'react';
-import BackgroundWall from '../assets/img/wallbackground.jpg'
 
 const Wall = () => {    
 

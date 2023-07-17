@@ -3,6 +3,7 @@ import { app } from '../lib/firebase.js';
 import { useNavigate } from 'react-router-dom';
 const BtnLogout = () => {
 
+    
     const auth = getAuth(app);
     const navigate = useNavigate();
 
@@ -10,6 +11,7 @@ const BtnLogout = () => {
     const handleClick = () => {        
         signOut(auth)
         .then(() => {
+          localStorage.setItem('currentUser', '')
           navigate('/');
         })
         .catch(() => {

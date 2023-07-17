@@ -26,49 +26,47 @@ const LoginForm = () => {
     }
     
     return (
-        <>
+        <>        
+            <form className="form-login" onSubmit={handleSubmit(onSubmit)}> 
+                <div className="container-input-login">           
+                    <label htmlFor="email">Your email</label>   
+                    <input
+                        {...register('email', {
+                            required: 'Email required',
+                            pattern: {
+                            value: /^\S+@\S+$/i,
+                            message: 'Invalid email'
+                            }
+                        })}
+                        type="text"
+                        className="input-login"
+                        id="email"
+                        placeholder="you@email.com"
+                        />     
+                    {errors.email && <p className="error-message">{errors.email.message}</p>}                  
+                </div>  
         
-                <form className="form-login" onSubmit={handleSubmit(onSubmit)}> 
-                    <div className="container-input-login">           
-                        <label htmlFor="email">Your email</label>   
-                        <input
-                            {...register('email', {
-                                required: 'Email required',
-                                pattern: {
-                                value: /^\S+@\S+$/i,
-                                message: 'Invalid email'
-                                }
+                <div className="container-input-login">  
+                    <label htmlFor="password">Password</label>
+                    <input
+                        {...register('password', { 
+                            required: 'Password required',
+                            minLength: {
+                                value: 4,
+                                message: 'Password too short',
+                            },
                             })}
-                            type="text"
-                            className="input-login"
-                            id="email"
-                            placeholder="you@email.com"
-                            />     
-                        {errors.email && <p className="error-message">{errors.email.message}</p>}                  
-                    </div>  
-            
-                    <div className="container-input-login">  
-                        <label htmlFor="password">Password</label>
-                        <input
-                            {...register('password', { 
-                                required: 'Password required',
-                                minLength: {
-                                    value: 4,
-                                    message: 'Password too short',
-                                },
-                             })}
-                            type="password"
-                            className="input-login"
-                            id="password"
-                            placeholder="•••••••"
-                        />
-                        {errors.password && <p className="error-message">{errors.password.message}</p>}                        
-                    </div>     
+                        type="password"
+                        className="input-login"
+                        id="password"
+                        placeholder="•••••••"
+                    />
+                    {errors.password && <p className="error-message">{errors.password.message}</p>}                        
+                </div>     
 
-                    <button type="submit" className="submit-btn">Login</button>
-                </form> 
-                <span className='span-login'>You do not have an account yet? <a href="" className="link" onClick={handleClickSignup}>Sign up for free</a></span>           
-
+                <button type="submit" className="submit-btn">Login</button>
+            </form> 
+            <span className='span-login'>Do not have an account yet? <a href="" className="link" onClick={handleClickSignup}>Sign up for free</a></span>           
         </>
     );
   };

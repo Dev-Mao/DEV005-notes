@@ -27,51 +27,47 @@ const SignUpForm = () => {
     }
     
     return (
-        <>
-            <section className="section-signup">
-                <form className="form-signup" onSubmit={handleSubmit(onSubmit)}> 
-                    <div className="container-input-new-employee">           
-                        <AiOutlineMail className="icon-form" />
-                        <label htmlFor="email">Email:</label>   
-                        <input
-                            {...register('email', {
-                                required: 'Email required',
-                                pattern: {
-                                value: /^\S+@\S+$/i,
-                                message: 'Invalid email'
-                                }
+        <>        
+            <form className="form-signup" onSubmit={handleSubmit(onSubmit)}> 
+                <div className="container-input-signup">           
+                    <label htmlFor="email">Your email</label>   
+                    <input
+                        {...register('email', {
+                            required: 'Email required',
+                            pattern: {
+                            value: /^\S+@\S+$/i,
+                            message: 'Invalid email'
+                            }
+                        })}
+                        type="text"
+                        className="input-signup"
+                        id="email"
+                        placeholder="you@email.com"
+                        />     
+                    {errors.email && <p className="error-message">{errors.email.message}</p>}                  
+                </div>  
+        
+                <div className="container-input-signup">  
+                    <label htmlFor="password">Password</label>
+                    <input
+                        {...register('password', { 
+                            required: 'Password required',
+                            minLength: {
+                                value: 4,
+                                message: 'Password too short',
+                            },
                             })}
-                            type="text"
-                            className="input-signup"
-                            id="email"
-                            placeholder="Email"
-                            />     
-                        {errors.email && <p className="error-message">{errors.email.message}</p>}                  
-                    </div>  
-            
-                    <div className="container-input-signup">  
-                        <AiOutlineLock className="icon-form" />
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            {...register('password', { 
-                                required: 'Password required',
-                                minLength: {
-                                    value: 4,
-                                    message: 'Password too short',
-                                },
-                             })}
-                            type="password"
-                            className="input-signup"
-                            id="password"
-                            placeholder="Password"
-                        />
-                        {errors.password && <p className="error-message">{errors.password.message}</p>}                        
-                    </div>     
+                        type="password"
+                        className="input-signup"
+                        id="password"
+                        placeholder="•••••••"
+                    />
+                    {errors.password && <p className="error-message">{errors.password.message}</p>}                        
+                </div>     
 
-                    <button type="submit" className="submit-btn">Register</button>
-                </form>
-                <span>Do you already have an account? <a href="" onClick={handleClickSignin}>Sign In</a></span>           
-            </section>
+                <button type="submit" className="submit-btn">Register</button>
+            </form>
+            <span className='span-signup'>Already have an account? <a href="" className="link" onClick={handleClickSignin}>Sign in</a></span>           
         </>
     );
   };

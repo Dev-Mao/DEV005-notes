@@ -1,6 +1,6 @@
 import BtnLoginGoogle from "../components/login/BtnLoginGoogle";
 import LoginForm from "../components/login/LoginForm";
-import ImgLogin from "../assets/img/login10.jpg";
+import ImgLogin from "../assets/img/login12.jpg";
 import { useEffect, useState } from "react";
 const Login = () => {   
     
@@ -26,8 +26,7 @@ const Login = () => {
                     <span className="span-login">Continue with Google or enter your details.</span>
                     <BtnLoginGoogle/>
                     <span className="span-login-lines">or</span>
-                    <LoginForm/>
-                    
+                    <LoginForm/>                    
                 </div>                         
                 {windowWidth > 834 && (
                     <picture className="image-login-container">

@@ -8,22 +8,22 @@
   padding: 0;
 }
 
-.login-container{
+.login-container, .signup-container{
   box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
   display: flex;
-  border-radius: 25px 0 25px 0;
+  border-radius: 50px 0 50px 0;
   justify-content: center;
   overflow: hidden;
   background-color: white;
   height: 90%;
   width: 80%;
-  font-size: 15px;
+  font-size: 20px;
 }
 .icon-google{
   font-size: 20px;
   margin-right: 5px;
 }
-.span-login, .span-login-lines{
+.span-login, .span-login-lines, .span-signup, .span-signup-lines{
   margin-top: 5px;
   margin-bottom: 3%;
 }
@@ -40,27 +40,32 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2%;
-  font-size: 15px;
+  font-size: 20px;
+  cursor: pointer;
 }
-.section-login{
+.btn-login-google:hover, .submit-btn:hover{
+  transform: scale(1.02);
+  box-shadow: 0px 3px 10px rgb(63, 63, 63);
+}
+.section-login, .section-signup{
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
   padding: 0;
-  background: linear-gradient(rgb(218, 218, 218), rgb(134, 134, 134));
+  background: linear-gradient(rgb(0, 0, 0), rgb(52, 52, 52));
 }
 
-.image-login-container {
+.image-login-container, .image-signup-container {
   width: 53%;
 }
-.image-login{
+.image-login, .image-signup{
   border-radius: 50px 0 50px 0;
   height: 100%;
   width: 99%;
 }
-.login-form-container {
+.login-form-container, .signup-form-container {
   width: 90%;
   display: flex;
   justify-content: center;
@@ -74,7 +79,7 @@
   align-items: center;
 }
 
-.form-login{
+.form-login, .form-signup{
   display:flex;
   flex-direction: column;
   align-items: center;
@@ -83,11 +88,11 @@
   width: 100%;
 }
 
-.title-login{
+.title-login, .title-signup{
   margin-bottom: 5%;
   font-size: 40px;
 }
-.container-input-login{
+.container-input-login, .container-input-signup{
   display: flex;
   flex-direction: column;
   width: 75%;
@@ -95,15 +100,15 @@
   gap: 5px;
 }
 
-.input-login{
+.input-login, .input-signup{
   height:5vh;
   border-radius: 5px;
   padding: 15px;
   border: 1px solid gray;
-  font-size: 15px;
+  font-size: 20px;
 }
 
-.input-login:focus{  
+.input-login:focus, .input-signup:focus{  
   border: 2px solid black;
 }
 
@@ -116,12 +121,17 @@
   background-color:black;
   font-weight: bold;
   margin-bottom: 5px;
-  font-size: 15px;
+  font-size: 20px;
+  cursor: pointer;
 }
 .link{
   text-decoration: none;
   color: black;
   font-weight: bold;
+  cursor: pointer;
+}
+.link:hover{
+  text-decoration:underline;
 }
 .modal-content{
   border: 2px solid red;
@@ -129,34 +139,70 @@
 .linea-horizontal {
   border-bottom: 1px solid black; /* Cambia el color y el grosor según tus necesidades */
 }
-.span-login-lines {
+
+.span-login-lines, .span-signup-lines {
   position: relative;
 }
 
 .span-login-lines::before,
-.span-login-lines::after {
+.span-login-lines::after, 
+.span-signup-lines::before,
+.span-signup-lines::after {
   content: "";
   position: absolute;
   top: 50%;
   height: 1px;
-  background-color: black;
+  background-color: rgb(190, 190, 190);
 }
 
-.span-login-lines::before {
+.span-login-lines::before, 
+.span-signup-lines::before {
   left: -150px;
   right: 100%;
   margin-right: 5px;
 }
 
-.span-login-lines::after {
+.span-login-lines::after,
+.span-signup-lines::after {
   right: -150px;
   left: 100%;
   margin-left: 5px;
 }
 
+.error-message{
+  color:rgb(179, 0, 0);
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/*Notas*/
+.container-notes{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.note-card{
+  width: 45%;
+  padding: 30px;
+  border-radius: 10px; 
+  background-color: rgba(255, 235, 181, 0.7);
+  overflow: hidden;
+}
+.background-wall {
+  position: fixed;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./assets/img/wallbackground.jpg');
+  background-size:cover;
+  background-repeat: no-repeat;
+  
+}
+
 @media (min-width: 835px) {
 
-  .login-container{
+  .login-container, .signup-container{
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     border-radius: 50px 0 50px 0;
@@ -168,15 +214,34 @@
     min-width: 800px;
   }
 
-  .login-form-container {
+  .login-form-container, .signup-form-container {
     width: 47%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
-  .span-login, .span-login-lines{
-    font-size: 0.8rem;
+
+  .input-login,
+  .input-signup, 
+  .span-login, 
+  .span-login-lines, 
+  .span-signup, 
+  .span-signup-lines,
+  .btn-login-google,
+  .submit-btn,
+  .login-container, 
+  .signup-container
+  {
+    font-size: 15px;
   }
-  
+
+  .error-message{
+    font-size: 12px;
+    font-weight: bold;
   }
+  .note-card{
+    width: 22%;
+  }
+
+}

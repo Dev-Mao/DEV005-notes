@@ -49,7 +49,11 @@ const NewNote = (props) => {
           <label htmlFor="title">Title:</label>   
           <input
               {...register('title', {
-                  required: 'Title required',                               
+                  required: 'Title required', 
+                  maxLength: {
+                    value: 50,
+                    message: 'Max 50 characters',
+                },                              
               })}
               type="text"
               className="input-new-note"

@@ -28,7 +28,7 @@ const SignUp= () => {
                         <span className="span-signup-lines">or</span>
                         <SignUpForm/>
                     </div>
-                    {windowWidth > 834 && (
+                    {windowWidth > 1000 && (
                     <picture className="image-signup-container">
                         <img src={ImgSignup} className="image-signup" alt="" />
                     </picture>

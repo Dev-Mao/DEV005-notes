@@ -28,7 +28,7 @@ const Login = () => {
                     <span className="span-login-lines">or</span>
                     <LoginForm/>                    
                 </div>                         
-                {windowWidth > 834 && (
+                {windowWidth > 1000 && (
                     <picture className="image-login-container">
                         <img src={ImgLogin} className="image-login" alt="" />
                     </picture>

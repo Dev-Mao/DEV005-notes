@@ -54,7 +54,10 @@
   height: 100vh;
   margin: 0;
   padding: 0;
-  background: linear-gradient(rgb(0, 0, 0), rgb(52, 52, 52));
+  background-image: url('./assets/img/wall9.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 
 .image-login-container, .image-signup-container {
@@ -181,26 +184,99 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  width:100%; 
+  padding-top: 10%;
+  padding-bottom: 3%;
 }
 .note-card{
+  max-height: 400px;
   width: 45%;
   padding: 30px;
-  border-radius: 10px; 
-  background-color: rgba(255, 235, 181, 0.7);
-  overflow: hidden;
+  background-color: rgba(25, 25, 25, 0.9);
+  color: white;
+  box-shadow: 0px 2px 8px rgb(140, 140, 140);
+  word-wrap: break-word;
+  cursor: pointer;
+}
+.note-card:hover{
+  transform: scale(1.02);
+  background-color: rgba(25, 25, 25, 0.7);
+}
+.note-title{
+  text-align:center;
+  font-size: 15px;
+}
+.note-content{
+  text-align: justify;
+  margin-bottom: 10px;
+  font-size: 20px;
+  color: rgb(106, 106, 106);
+  padding: 15px;
+  border-radius: 20px 0 20px 0;
+  height: 75%;
+  overflow: auto;
 }
 .background-wall {
   position: fixed;
   z-index: -1;
   width: 100vw;
   height: 100vh;
-  background-image: url('./assets/img/backgroundwall2.jpg');
-  
+  background-image: url('./assets/img/wall9.jpg');
+  background-size: cover;
   background-repeat: no-repeat;
-  
 }
 
-@media (min-width: 835px) {
+.container-btn-new-note{
+  width: 15%;
+  background-color:  rgba(255, 255, 255, 1);
+  height: 100vh;
+  position: fixed;
+  top: 0;
+}
+.btn-new-note, .btn-logout{
+  cursor: pointer;
+  border:none;
+  border-top:1px solid black;
+  border-bottom:1px solid black;
+  height: 50px;
+  width: 100%;  
+  font-size: 20px;
+  background-color:  rgba(255, 255, 255, 0);
+  margin-top: 20px;
+}
+.btn-logout{
+  bottom: 3px;
+  position: absolute;
+}
+.btn-new-note:hover, .btn-logout:hover{
+  background-color:  rgba(173, 173, 173, 0.3);  
+  transform: scale(1.02);
+  box-shadow: 0px 3px 10px rgb(63, 63, 63);
+}
+.logo{
+  width: 100%;
+}
+.icon-menu{
+  color: white;
+  font-size: 50px;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+}
+.icon-menu-lil{
+  font-size: 50px;
+  margin-top: 10px;
+  margin-left: 10px;
+
+}
+.container-btn-new-note-lil{
+  position: absolute;
+  width: 30%;
+  background-color:  rgba(255, 255, 255, 1);
+  height: 100vh;
+  position: fixed;
+}
+@media (min-width: 900px) {
 
   .login-container, .signup-container{
     box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.2);
@@ -220,6 +296,10 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+  }
+  .container-notes{
+    padding-left: 15%;
+    padding-top: 3%;
   }
 
   .input-login,
@@ -242,6 +322,9 @@
   }
   .note-card{
     width: 22%;
+  }
+  .note-content{
+    font-size: 15px;
   }
 
 }

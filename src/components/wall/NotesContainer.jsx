@@ -1,8 +1,7 @@
-import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc, getDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { app } from '../../lib/firebase';
 import {RiDeleteBin6Line} from 'react-icons/ri'
-import {AiOutlineEdit} from 'react-icons/ai'
 import Modal from 'react-modal';
 import EditNote from './EditNote';
 
@@ -10,27 +9,26 @@ const NotesContainer = () => {
   const [notes, setNotes] = useState([]);
   const [editSuccess, setEditSuccess] = useState(false);
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
-  const [selectedNote, setSelectedNote] = useState('');
+  const [selectedNote, setSelectedNote] = useState({});
   const [isModalEditOpen, setIsModalEditOpen] = useState('');
   const currentUser = localStorage.getItem('currentUser');
 
   const handleDelete = () => {
-    deleteDoc(doc(getFirestore(), 'notes', selectedNote));
+    deleteDoc(doc(getFirestore(), 'notes', selectedNote.id));
     setIsModalConfirmOpen(false)
   }
 
-  const handleIconEdit = (noteId) =>{
-    setIsModalEditOpen(true)
-    setSelectedNote(noteId)
-    setEditSuccess(false)
-   
+  const handleEdit = (note) =>{      
+    setSelectedNote(note)
+    setEditSuccess(false)  
+    setIsModalEditOpen(true) 
   }
 
-  const handleIconDelete = (noteId) =>{
+  const handleIconDelete = (note) =>{
+    setSelectedNote(note)
     setIsModalConfirmOpen(true)
-    setSelectedNote(noteId)
   }
-
+  
   useEffect(() => {
   
       const db = getFirestore(app);
@@ -69,20 +67,21 @@ const NotesContainer = () => {
         </Modal>
         <div className="container-notes">
         {notes.map((note) => (
-            <div className="note-card" key={note.id}>
-                <h3>{note.title}</h3>
-                <p>{note.content}</p>
-                <AiOutlineEdit onClick={() => handleIconEdit(note)} />
-                <RiDeleteBin6Line onClick={() => handleIconDelete(note.id)}/>
+            <div className="note-card" key={note.id} onClick={() => handleEdit(note)}>
+                <h2 className = "note-title">{note.title}</h2>
+                <p className = "note-content">{note.content}</p>
+                
+                <RiDeleteBin6Line onClick={() => handleIconDelete(note)}/>
             </div>
         ))}
             <EditNote 
+                selectedNote = {selectedNote}
                 isOpen = {isModalEditOpen}  
                 onRequestClose={() => setIsModalEditOpen(false)} 
                 onClick={() => setIsModalEditOpen(false)}
                 editSuccess = {editSuccess}
-                setEditSuccess = {setEditSuccess}
-                selectedNote = {selectedNote}
+                setEditSuccess = {setEditSuccess}                
+                setSelectedNote = {setSelectedNote}
             />
         </div>
     </>

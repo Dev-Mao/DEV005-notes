@@ -1,19 +1,20 @@
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
-import { getFirestore, updateDoc, doc } from 'firebase/firestore';
-
+import { getFirestore, updateDoc, doc} from 'firebase/firestore';
 
 const EditNote = (props) => {
-
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
+
 
     const onSubmit = (data) =>{
             updateDoc(doc(getFirestore(), 'notes', props.selectedNote.id), data)
             .then(() =>{
                 props.setEditSuccess(true)
-              reset()
-            });          
+                reset()
+      });          
     }
+
+
     return (
       <Modal
         isOpen={props.isOpen}

@@ -10,10 +10,8 @@ const BtnLoginGoogle = () => {
 
     // Define la función signinGoogle
     const handleClick = () => {
-    // Iniciar el proceso de autenticación con redirección de Google
         signInWithRedirect(auth, provider)
         .then(() => {
-           
         })
         .catch(() => {
         });
@@ -25,7 +23,6 @@ const BtnLoginGoogle = () => {
         }).catch(() => {
         
         });
-
     };
     
     return (

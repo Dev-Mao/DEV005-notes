@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { app } from '../../lib/firebase';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, addDoc, collection } from 'firebase/firestore';
-import PropTypes from 'prop-types';
+
 
 
 const NewNote = (props) => {
@@ -36,7 +36,7 @@ const NewNote = (props) => {
             padding: '20px',
           },
         }}
-        className="modal-content"
+        className="container-modal-new-note"
       >
         {props.success ? (
     <div>
@@ -44,46 +44,48 @@ const NewNote = (props) => {
       <p>Your note has been created.</p>
     </div>
   ) : (
-    <form className="form-login" onSubmit={handleSubmit(onSubmit)}> 
-      <div className="container-input-new-note">           
-          <label htmlFor="title">Title:</label>   
-          <input
-              {...register('title', {
-                  required: 'Title required', 
-                  maxLength: {
-                    value: 50,
-                    message: 'Max 50 characters',
-                },                              
-              })}
-              type="text"
-              className="input-new-note"
-              id="title"
-              placeholder="Title"
-              />     
-          {errors.title && <p className="error-message">{errors.title.message}</p>}                  
-      </div>  
+   
+      <form className="form-new-note" onSubmit={handleSubmit(onSubmit)}> 
+        <div className="container-input-new-note">           
+            <label htmlFor="title">Title</label>   
+            <input
+                {...register('title', {
+                    required: 'Title required', 
+                    maxLength: {
+                      value: 50,
+                      message: 'Max 50 characters',
+                  },                              
+                })}
+                type="text"
+                className="input-new-note"
+                id="title"
+                placeholder="Your title"
+                />     
+            {errors.title && <p className="error-message">{errors.title.message}</p>}                  
+        </div>  
 
-      <div className="container-input-new-note">  
-          <label htmlFor="content">Content:</label>
-          <textarea
-              {...register('content', { 
-                  required: 'content required',
-                  maxLength: {
-                      value: 300,
-                      message: 'Max 300 characters',
-                  },
-              })}
-              type="text"
-              className="input-login"
-              id="content"
-              placeholder="Content"
-              rows="5"
-          ></textarea>
-          {errors.content && <p className="error-message">{errors.content.message}</p>}                        
-      </div>     
+        <div className="container-textarea-new-note">  
+            <label htmlFor="content">Content</label>
+            <textarea
+                {...register('content', { 
+                    required: 'Content required',
+                    maxLength: {
+                        value: 300,
+                        message: 'Max 300 characters',
+                    },
+                })}
+                type="text"
+                className="textarea-new-note"
+                id="content"
+                placeholder="Start typing"
+                rows="5"
+            ></textarea>
+            {errors.content && <p className="error-message">{errors.content.message}</p>}                        
+        </div>     
 
-      <button type="submit" className="submit-btn">Create</button>
-    </form> 
+        <button type="submit" className="create-btn">Create</button>
+      </form> 
+      
   )}       
       </Modal>
     );
@@ -91,9 +93,3 @@ const NewNote = (props) => {
   
 export default NewNote;
   
-NewNote.propTypes = {
-  success: PropTypes.bool,
-  onRequestClose: PropTypes.func,
-  isOpen: PropTypes.bool,
-  setSuccess: PropTypes.func,
-};

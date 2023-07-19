@@ -5,7 +5,7 @@ import {RiDeleteBin6Line} from 'react-icons/ri'
 import Modal from 'react-modal';
 import EditNote from './EditNote';
 
-const NotesContainer = () => {
+const NotesContainer = (props) => {
   const [notes, setNotes] = useState([]);
   const [editSuccess, setEditSuccess] = useState(false);
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
@@ -22,13 +22,15 @@ const NotesContainer = () => {
     setSelectedNote(note)
     setEditSuccess(false)  
     setIsModalEditOpen(true) 
+    props.setShowAside(false)
   }
 
   const handleIconDelete = (note) =>{
     setSelectedNote(note)
     setIsModalConfirmOpen(true)
+    props.setShowAside(false)
   }
-  
+
   useEffect(() => {
   
       const db = getFirestore(app);
@@ -48,6 +50,7 @@ const NotesContainer = () => {
 
   return (
     <>
+    
         <Modal
             isOpen={isModalConfirmOpen}
             onRequestClose={() => setIsModalConfirmOpen(false)}
@@ -59,19 +62,25 @@ const NotesContainer = () => {
                 padding: '20px',
               },
             }}
-            className="modal-content"
+            className="modal-confirm"
         >
+          <div className='container-modal-confirm'>
           <span>Are you sure you want to delete this note?</span>
-          <button onClick={() => setIsModalConfirmOpen(false)}>No, I do not</button>
-          <button onClick={()=>handleDelete()}>Yes, I do</button>
+          <button className = "btn-cancel" onClick={() => setIsModalConfirmOpen(false)}>No, I do not</button>
+          <button className = "btn-confirm" onClick={()=>handleDelete()}>Yes, I do</button>
+          </div>
         </Modal>
+        
         <div className="container-notes">
         {notes.map((note) => (
             <div className="note-card" key={note.id} onClick={() => handleEdit(note)}>
                 <h2 className = "note-title">{note.title}</h2>
                 <p className = "note-content">{note.content}</p>
                 
-                <RiDeleteBin6Line onClick={() => handleIconDelete(note)}/>
+                <RiDeleteBin6Line className='icon-delete'  onClick={(event) => {
+        event.stopPropagation();
+        handleIconDelete(note);
+    }}/>
             </div>
         ))}
             <EditNote 
@@ -81,7 +90,6 @@ const NotesContainer = () => {
                 onClick={() => setIsModalEditOpen(false)}
                 editSuccess = {editSuccess}
                 setEditSuccess = {setEditSuccess}                
-                setSelectedNote = {setSelectedNote}
             />
         </div>
     </>

@@ -14,6 +14,7 @@ const Wall = () => {
 
 
     const openModal = () => {
+      setShowAside(false);
       setIsModalOpen(true);
       setSuccess(false);
     };
@@ -66,7 +67,7 @@ const Wall = () => {
                     )}
                   </>
                 )}
-              <NotesContainer/>    
+              <NotesContainer setShowAside = {setShowAside}/>    
             <NewNote success = {success} setSuccess = {setSuccess} isOpen={isModalOpen} onRequestClose={closeModal} />
             
         </>

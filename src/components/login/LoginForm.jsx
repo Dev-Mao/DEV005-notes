@@ -69,6 +69,6 @@ const LoginForm = () => {
             <span className='span-login'>Do not have an account yet? <a href="" className="link" onClick={handleClickSignup}>Sign up for free</a></span>           
         </>
     );
-  };
+};
 
 export default LoginForm;

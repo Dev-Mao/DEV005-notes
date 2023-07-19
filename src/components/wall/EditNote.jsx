@@ -1,10 +1,10 @@
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import { getFirestore, updateDoc, doc} from 'firebase/firestore';
+import { useEffect } from 'react';
 
 const EditNote = (props) => {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm()
-
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm()
 
     const onSubmit = (data) =>{
             updateDoc(doc(getFirestore(), 'notes', props.selectedNote.id), data)
@@ -14,8 +14,19 @@ const EditNote = (props) => {
       });          
     }
 
+  
 
-    return (
+    useEffect(() => {
+      if (props.selectedNote.title) {
+        setValue('title', props.selectedNote.title);
+      }
+  
+      if (props.selectedNote.content) {
+        setValue('content', props.selectedNote.content);
+      }
+    }, [props.selectedNote, setValue]);
+
+    return(
       <Modal
         isOpen={props.isOpen}
         onRequestClose={props.onRequestClose}
@@ -27,7 +38,7 @@ const EditNote = (props) => {
             padding: '20px',
           },
         }}
-        className="modal-content"
+        className="modal-edit"
       >
         {props.editSuccess ? (
     <div>
@@ -35,24 +46,24 @@ const EditNote = (props) => {
       <p>Your note has been edited.</p>
     </div>
   ) : (
-    <form className="form-login" onSubmit={handleSubmit(onSubmit)}> 
-      <div className="container-input-new-note">           
-          <label htmlFor="title">Title:</label>   
+    <form className="note-card-edit" onSubmit={handleSubmit(onSubmit)}> 
+      <div className="container-input-edit-note">           
+          <label htmlFor="title">Title</label>   
           <input
               {...register('title', {
                   required: 'Title required',                               
               })}
               type="text"
-              className="input-new-note"
+              className="input-edit-note"
               id="title"
-              placeholder="Title"
+              placeholder="Ypur title"
               defaultValue={props.selectedNote.title}
               />     
           {errors.title && <p className="error-message">{errors.title.message}</p>}                  
       </div>  
 
-      <div className="container-input-new-note">  
-          <label htmlFor="content">Content:</label>
+      <div className="container-textarea-edit-note">  
+          <label htmlFor="content">Content</label>
           <textarea
               {...register('content', { 
                   required: 'content required',
@@ -62,16 +73,15 @@ const EditNote = (props) => {
                   },
               })}
               type="text"
-              className="input-login"
+              className="textarea-edit-note"
               id="content"
-              placeholder="Content"
-              rows="5"
+              placeholder="Start typing"  
               defaultValue={props.selectedNote.content}
           ></textarea>
           {errors.content && <p className="error-message">{errors.content.message}</p>}                        
       </div>     
 
-      <button type="submit" className="submit-btn">Edit</button>
+      <button type="submit" className="edit-btn">Save</button>
     </form> 
   )}       
       </Modal>

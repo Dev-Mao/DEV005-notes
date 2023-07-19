@@ -265,16 +265,18 @@
 
 .container-btn-new-note{
   width: 15%;
-  background-color:  rgba(255, 255, 255, 1);
+  background-color:  rgba(25, 25, 25, 0.9);
   height: 100vh;
   position: fixed;
   top: 0;
+  box-shadow: 0px 2px 5px rgb(140, 140, 140);
 }
 .btn-new-note, .btn-logout{
   cursor: pointer;
   border:none;
-  border-top:1px solid black;
-  border-bottom:1px solid black;
+  color: white;
+  border-top:1px solid white;
+  border-bottom:1px solid white;
   height: 50px;
   width: 100%;  
   font-size: 20px;
@@ -304,14 +306,15 @@
   font-size: 50px;
   margin-top: 10px;
   margin-left: 10px;
-
+  color: white;
 }
 .container-btn-new-note-lil{
   z-index: 2;
   width: 30%;
-  background-color:  rgba(255, 255, 255, 1);
   height: 100vh;
   position: fixed;
+  background-color:  rgba(25, 25, 25, 0.9);
+  box-shadow: 0px 2px 5px rgb(140, 140, 140);
 }
 
 .icon-delete{

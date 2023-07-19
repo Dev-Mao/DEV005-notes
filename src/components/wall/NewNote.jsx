@@ -24,10 +24,24 @@ const NewNote = (props) => {
             const auth = getAuth(app);
             const title = data.title;
             const content = data.content;
+            // Obtén la fecha y hora actual
+            const date = new Date();
+
+            // Guarda la fecha y hora en variables separadas
+            const day = date.getDate();
+            const month = date.getMonth() + 1; // ¡Recuerda que los meses son indexados desde 0!
+            const year = date.getFullYear();
+            const hour = date.getHours();
+            const minutes = date.getMinutes();
+            
+            // Imprime la fecha y hora en el formato deseado
+            const fullDay = `${day}/${month}/${year}`;
+            const fullHour = `${hour}:${minutes}`;
             addDoc(collection(getFirestore(), 'notes'), {
               title,
               content,
               author: auth.currentUser.email,
+              date:`${fullDay} - ${fullHour}`
             })
             .then(() =>{
               props.setSuccess(true);

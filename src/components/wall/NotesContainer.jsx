@@ -1,4 +1,4 @@
-import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc } from 'firebase/firestore';
+import { getFirestore, collection, orderBy, onSnapshot, query, where, deleteDoc, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { app } from '../../lib/firebase';
 import {RiDeleteBin6Line} from 'react-icons/ri'
@@ -13,9 +13,18 @@ const NotesContainer = (props) => {
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState({});
   const [isModalEditOpen, setIsModalEditOpen] = useState('');
+  // Utiliza el estado del componente para almacenar currentUserEmail
+  const [currentUserEmail, setCurrentUserEmail] = useState('');
   
   const auth = getAuth(app);
-  const currentUserEmail = auth.currentUser.email;
+  useEffect(() => {
+    // Obtener el usuario actualmente autenticado
+    const user = auth.currentUser;
+    if (user) {
+      setCurrentUserEmail(user.email);
+    }
+  }, [auth.currentUser]);
+
 
   const handleDelete = () => {
     deleteDoc(doc(getFirestore(), 'notes', selectedNote.id));
@@ -39,8 +48,11 @@ const NotesContainer = (props) => {
   
       const db = getFirestore(app);
       const notesRef = collection(db, 'notes');
-      const q = query(notesRef, where('author', '==', currentUserEmail));
-      const unsubscribe = onSnapshot(q, (snapshot) => {
+      const q = query(
+        notesRef,
+        where('author', '==', currentUserEmail), orderBy('date', 'desc') 
+      );
+        const unsubscribe = onSnapshot(q, (snapshot) => {
         const notesData = [];
         snapshot.forEach((doc) => {
           notesData.push({ id: doc.id, ...doc.data() });
@@ -77,10 +89,11 @@ const NotesContainer = (props) => {
         
         <div className="container-notes">
         {notes.map((note) => (
+      
             <div className="note-card" key={note.id} onClick={() => handleEdit(note)}>
                 <h2 className = "note-title">{note.title}</h2>
                 <p className = "note-content">{note.content}</p>
-                
+                <span>{note.date}</span>
                 <RiDeleteBin6Line className='icon-delete'  onClick={(event) => {
         event.stopPropagation();
         handleIconDelete(note);

@@ -2,7 +2,7 @@ import BtnLogout from "../components/BtnLogout";
 import NewNote from "../components/wall/NewNote";
 import NotesContainer from "../components/wall/NotesContainer";
 import { useState, useEffect } from 'react';
-import Logo from '../assets/img/logo.png'
+import Logo from '../assets/img/logoLabWhite.png'
 import {FiMenu} from 'react-icons/fi'
 
 const Wall = () => {    

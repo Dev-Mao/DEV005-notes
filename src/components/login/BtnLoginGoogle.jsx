@@ -16,13 +16,6 @@ const BtnLoginGoogle = () => {
         .catch(() => {
         });
 
-        getRedirectResult(auth)
-        .then((result) => { 
-            const user = result.user;
-            localStorage.setItem('currentUser', user.email)
-        }).catch(() => {
-        
-        });
     };
     
     return (

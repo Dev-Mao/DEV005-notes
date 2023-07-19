@@ -5,6 +5,7 @@ import {RiDeleteBin6Line} from 'react-icons/ri'
 import Modal from 'react-modal';
 import EditNote from './EditNote';
 import PropTypes from 'prop-types';
+import { getAuth } from 'firebase/auth';
 
 const NotesContainer = (props) => {
   const [notes, setNotes] = useState([]);
@@ -12,9 +13,9 @@ const NotesContainer = (props) => {
   const [isModalConfirmOpen, setIsModalConfirmOpen] = useState(false);
   const [selectedNote, setSelectedNote] = useState({});
   const [isModalEditOpen, setIsModalEditOpen] = useState('');
-  const currentUser = localStorage.getItem('currentUser');
-
-  console.log("muro",currentUser)
+  
+  const auth = getAuth(app);
+  const currentUserEmail = auth.currentUser.email;
 
   const handleDelete = () => {
     deleteDoc(doc(getFirestore(), 'notes', selectedNote.id));
@@ -38,7 +39,7 @@ const NotesContainer = (props) => {
   
       const db = getFirestore(app);
       const notesRef = collection(db, 'notes');
-      const q = query(notesRef, where('author', '==', currentUser));
+      const q = query(notesRef, where('author', '==', currentUserEmail));
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const notesData = [];
         snapshot.forEach((doc) => {
@@ -49,7 +50,7 @@ const NotesContainer = (props) => {
 
       return () => unsubscribe();
     
-  }, [currentUser]);
+  }, [currentUserEmail]);
 
   return (
     <>

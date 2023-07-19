@@ -11,7 +11,6 @@ const BtnLogout = () => {
     const handleClick = () => {        
         signOut(auth)
         .then(() => {
-          localStorage.setItem('currentUser', '')
           navigate('/');
         })
         .catch(() => {

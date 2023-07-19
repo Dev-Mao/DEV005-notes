@@ -1,9 +1,10 @@
-import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, query, where, deleteDoc, doc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import { app } from '../../lib/firebase';
 import {RiDeleteBin6Line} from 'react-icons/ri'
 import Modal from 'react-modal';
 import EditNote from './EditNote';
+import PropTypes from 'prop-types';
 
 const NotesContainer = (props) => {
   const [notes, setNotes] = useState([]);
@@ -97,3 +98,7 @@ const NotesContainer = (props) => {
 };
 
 export default NotesContainer;
+
+NotesContainer.propTypes = {
+  setShowAside: PropTypes.func
+};

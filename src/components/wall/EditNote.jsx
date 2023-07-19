@@ -2,6 +2,7 @@ import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import { getFirestore, updateDoc, doc} from 'firebase/firestore';
 import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const EditNote = (props) => {
     const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm()
@@ -14,7 +15,15 @@ const EditNote = (props) => {
       });          
     }
 
-  
+    useEffect(() => {
+      let timer;
+      if (props.editSuccess) {
+        timer = setTimeout(() => {
+          props.onRequestClose(false);
+        }, 1200); // Close the success modal after 3 seconds
+      }
+      return () => clearTimeout(timer);
+    }, [props.editSuccess, props]);
 
     useEffect(() => {
       if (props.selectedNote.title) {
@@ -41,7 +50,7 @@ const EditNote = (props) => {
         className="modal-edit"
       >
         {props.editSuccess ? (
-    <div>
+    <div className='success'>
       <h2>Success!</h2>
       <p>Your note has been edited.</p>
     </div>
@@ -56,7 +65,7 @@ const EditNote = (props) => {
               type="text"
               className="input-edit-note"
               id="title"
-              placeholder="Ypur title"
+              placeholder="Your title"
               defaultValue={props.selectedNote.title}
               />     
           {errors.title && <p className="error-message">{errors.title.message}</p>}                  
@@ -90,3 +99,10 @@ const EditNote = (props) => {
   
 export default EditNote;
   
+EditNote.propTypes = {
+  selectedNote: PropTypes.object,
+  onRequestClose: PropTypes.func,
+  isOpen: PropTypes.bool,
+  editSuccess: PropTypes.bool,
+  setEditSuccess: PropTypes.func,
+};

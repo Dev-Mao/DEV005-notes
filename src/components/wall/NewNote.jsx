@@ -3,12 +3,22 @@ import { useForm } from 'react-hook-form';
 import { app } from '../../lib/firebase';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, addDoc, collection } from 'firebase/firestore';
-
-
+import { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const NewNote = (props) => {
 
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
+
+    useEffect(() => {
+      let timer;
+      if (props.success) {
+        timer = setTimeout(() => {
+          props.onRequestClose(false);
+        }, 1200); // Close the success modal after 3 seconds
+      }
+      return () => clearTimeout(timer);
+    }, [props.success, props]);
 
     const onSubmit = (data) =>{
             const auth = getAuth(app);
@@ -22,7 +32,8 @@ const NewNote = (props) => {
             .then(() =>{
               props.setSuccess(true);
               reset()
-            });          
+            });
+
     }
     return (
       <Modal
@@ -39,12 +50,11 @@ const NewNote = (props) => {
         className="container-modal-new-note"
       >
         {props.success ? (
-    <div>
+    <div className='success'>
       <h2>Success!</h2>
       <p>Your note has been created.</p>
     </div>
-  ) : (
-   
+  ) : (   
       <form className="form-new-note" onSubmit={handleSubmit(onSubmit)}> 
         <div className="container-input-new-note">           
             <label htmlFor="title">Title</label>   
@@ -93,3 +103,9 @@ const NewNote = (props) => {
   
 export default NewNote;
   
+NewNote.propTypes = {
+  success: PropTypes.bool,
+  onRequestClose: PropTypes.func,
+  isOpen: PropTypes.bool,
+  setSuccess: PropTypes.func,
+};

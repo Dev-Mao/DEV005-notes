@@ -15,6 +15,7 @@ const LoginForm = () => {
         signInWithEmailAndPassword(auth, data.email, data.password)
         .then(() => {
             localStorage.setItem('currentUser', auth.currentUser.email)
+        
         })
         .catch((err) => {
             console.log(err)

@@ -14,6 +14,8 @@ const NotesContainer = (props) => {
   const [isModalEditOpen, setIsModalEditOpen] = useState('');
   const currentUser = localStorage.getItem('currentUser');
 
+  console.log("muro",currentUser)
+
   const handleDelete = () => {
     deleteDoc(doc(getFirestore(), 'notes', selectedNote.id));
     setIsModalConfirmOpen(false)
